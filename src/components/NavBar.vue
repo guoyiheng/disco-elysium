@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { isDark, toggleDark } from '~/composables'
+import { isDark, toggleDark } from '~/logics'
 </script>
 
 <template>
-  <nav py-2 px-4 flex items-center justify-center>
+  <nav py-4 px-4 flex items-center justify-center>
     <h1>
-      <b>disco</b> elysium
+      <b>Disco</b> Elysium
     </h1>
     <div class="flex-auto" />
     <a
@@ -15,7 +15,7 @@ import { isDark, toggleDark } from '~/composables'
       href="https://github.com/antfu/disco-elysium"
       target="_blank"
       title="GitHub"
-      mr-2
+      mr-4
     />
     <button class="icon-btn !outline-none" @click="toggleDark()">
       <div v-if="isDark" i-carbon-moon />

@@ -2,11 +2,11 @@ import { ref, computed } from 'vue'
 import { useDebounce, useLocalStorage } from '@vueuse/core'
 
 
-export const text = useLocalStorage('flags', 'gm')
+export const text = useLocalStorage('text', 'Hello World')
 
 export const error = ref<Error | null>(null)
 
-export const findRaw = function () {
+export const handleSearch = function () {
   return ref('')
 }
 
