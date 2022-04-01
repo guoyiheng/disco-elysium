@@ -9,5 +9,5 @@
 <a href="https://disco-elysium.netlify.app/">Go to App</a>
 </p>
 <p align='center'>
-  <img src='https://s3.bmp.ovh/imgs/2022/04/01/012fbc67944bfc13.png' alt='Vitesse - Opinionated Vite Starter Template' width='600'/>
+  <img src='https://s3.bmp.ovh/imgs/2022/04/01/261d41b440335a54.png' width='600'/>
 </p>
