@@ -3,7 +3,7 @@ import { isDark, toggleDark } from '~/logics'
 </script>
 
 <template>
-  <nav py-4 px-4 flex items-center justify-center>
+  <nav py-4 flex items-center justify-center>
     <h1>
       <b>Disco</b> Elysium
     </h1>

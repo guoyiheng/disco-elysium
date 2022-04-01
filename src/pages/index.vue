@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="grid h-screen w-screen overflow-hidden"
-    style="grid-template-rows: min-content min-content auto;"
-  >
+  <div class="h-screen w-screen overflow-hidden px-4">
     <NavBar />
     <SearchArea />
     <ResultArea />
