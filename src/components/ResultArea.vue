@@ -1,10 +1,23 @@
 
 <script setup lang="ts">
 import { inputText, sentenceFilter } from '~/logics'
+
 const clipboard = useClipboard()
 function copy(s: string) {
   clipboard.copy(s.replace(`<span class="highlight">${inputText.value}</span>`, inputText.value))
 }
+
+const { list, containerProps, wrapperProps, scrollTo } = useVirtualList(
+  sentenceFilter,
+  {
+    itemHeight: 22,
+  },
+)
+// 变化时滚动到最上方，不然找不到
+watch(sentenceFilter, () => {
+  scrollTo(0)
+})
+
 </script>
 
 <template>
@@ -16,19 +29,22 @@ function copy(s: string) {
           <a i-carbon:text-annotation-toggle opacity50 mr-2 />
           <span opacity50 text-sm>TEXT</span>
         </div>
-        <div class="overflow-y-scroll h-70vh w-full">
-          <div
-            v-for="(s, i) in sentenceFilter"
-            :key="i"
-            whitespace-pre-wrap
-            break-all
-            hyphens-auto
-            mb-4
-            opacity="50 hover:100"
-            cursor-pointer
-            @click="copy(s)"
-            v-html="s"
-          />
+        <div v-bind="containerProps" class="overflow-y-scroll h-70vh w-full">
+          <div v-bind="wrapperProps">
+            <div
+              v-for="(s, i) in list"
+              :key="i"
+              whitespace-pre-wrap
+              break-all
+              hyphens-auto
+              mb-4
+              opacity="50 hover:100"
+              cursor-pointer
+              h-22
+              @click="copy(s.data)"
+              v-html="s.data"
+            />
+          </div>
         </div>
       </div>
     </div>

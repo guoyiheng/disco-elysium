@@ -1,5 +1,5 @@
 import { computed, ref } from 'vue'
-import { useDebounce, useLocalStorage } from '@vueuse/core'
+import { useLocalStorage } from '@vueuse/core'
 import sentenceJson from '~/sentence/index.json'
 
 // error
@@ -9,18 +9,23 @@ export const error = ref<Error | null>(null)
 export const sentence = computed(() => {
   return sentenceJson.sentence.split('###')
 })
-// show data
-export const sentenceFilter = ref(sentence.value)
 
 // input
 export const inputText = useLocalStorage('inputText', 'xxx')
 
-watchDebounced(
-  inputText,
-  () => {
-    sentenceFilter.value = sentence.value.filter((s: string) => {
-      return s.includes(inputText.value)
-    }).map(s => s.replace(inputText.value, `<span class="highlight">${inputText.value}</span>`))
-  },
-  { debounce: 500 },
-)
+// show data
+// export const sentenceFilter = ref(sentence.value)
+// watchDebounced(
+//   inputText,
+//   () => {
+//     sentenceFilter.value = sentence.value.filter((s: string) => {
+//       return s.includes(inputText.value)
+//     }).map(s => s.replace(inputText.value, `<span class="highlight">${inputText.value}</span>`))
+//   },
+//   { debounce: 500 },
+// )
+export const sentenceFilter = computed(() => {
+  return sentence.value.filter((s: string) => {
+    return s.includes(inputText.value)
+  }).map(s => s.replace(inputText.value, `<span class="highlight">${inputText.value}</span>`))
+})
