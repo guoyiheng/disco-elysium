@@ -10,7 +10,8 @@ function copy(s: string) {
 const { list, containerProps, wrapperProps, scrollTo } = useVirtualList(
   sentenceFilter,
   {
-    itemHeight: 22,
+    itemHeight: 20,
+    overscan: 20,
   },
 )
 // 变化时滚动到最上方，不然找不到
@@ -40,7 +41,6 @@ watch(sentenceFilter, () => {
               mb-4
               opacity="50 hover:100"
               cursor-pointer
-              h-22
               @click="copy(s.data)"
               v-html="s.data"
             />
