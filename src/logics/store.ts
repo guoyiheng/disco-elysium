@@ -1,24 +1,26 @@
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useDebounce, useLocalStorage } from '@vueuse/core'
+import sentenceJson from '~/sentence/index.json'
 
-
-export const text = useLocalStorage('text', 'Hello World')
-
+// error
 export const error = ref<Error | null>(null)
 
-export const handleSearch = function () {
-  return ref('')
-}
+// origin data
+export const sentence = computed(() => {
+  return sentenceJson.sentence.split('###')
+})
+// show data
+export const sentenceFilter = ref(sentence.value)
 
-// export const throttleFind = useDebounce(findRaw, 300)
-// export const findRegex = computed(() => {
-//   error.value = null
-//   try {
-//     return new RegExp(throttleFind.value, flags.value)
-//   }
-//   catch (e) {
-//     error.value = e
-//     console.error(e)
-//     return new RegExp('', 'g')
-//   }
-// })
+// input
+export const inputText = useLocalStorage('inputText', 'xxx')
+
+watchDebounced(
+  inputText,
+  () => {
+    sentenceFilter.value = sentence.value.filter((s: string) => {
+      return s.includes(inputText.value)
+    }).map(s => s.replace(inputText.value, `<span class="highlight">${inputText.value}</span>`))
+  },
+  { debounce: 500 },
+)

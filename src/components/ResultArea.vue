@@ -1,8 +1,10 @@
 
 <script setup lang="ts">
-onMounted(() => {
-  // const { data } = useFetch('https://gist.github.com/guoyiheng/7dd033b139e8ad55ad05469ed822ec50').get().json()
-})
+import { inputText, sentenceFilter } from '~/logics'
+const clipboard = useClipboard()
+function copy(s: string) {
+  clipboard.copy(s.replace(`<span class="highlight">${inputText.value}</span>`, inputText.value))
+}
 </script>
 
 <template>
@@ -16,18 +18,25 @@ onMounted(() => {
         </div>
         <div class="overflow-y-scroll h-70vh w-full">
           <div
-            v-for="i in 100"
+            v-for="(s, i) in sentenceFilter"
             :key="i"
             whitespace-pre-wrap
             break-all
             hyphens-auto
             mb-4
-            :text="i <= 10 ? '$text-color' : '$text-color-shallow'"
-          >
-            {{ i }} xxxxxxxxx xxxxxxxxx xxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxx xxxxxxxx xxxxxxxx xxxxxxxxx xxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxx xxxxxxxxxxx xxxxxxx
-          </div>
+            opacity="50 hover:100"
+            cursor-pointer
+            @click="copy(s)"
+            v-html="s"
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<style>
+.highlight {
+  color: var(--primary-color);
+}
+</style>

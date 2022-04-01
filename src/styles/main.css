@@ -13,6 +13,4 @@ html.dark {
 :root {
   --primary-color: rgba(215, 84, 85, 0.9);
   --primary-color-deep: rgba(215, 84, 85, 1);
-  --text-color: #222;
-  --text-color-shallow: #2225;
 }
