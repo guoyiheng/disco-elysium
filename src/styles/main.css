@@ -11,6 +11,6 @@ html.dark {
 }
 
 :root {
-  --primary-color: rgba(215, 84, 85, 0.9);
-  --primary-color-deep: rgba(215, 84, 85, 1);
+  --primary-color: #d75455e6;
+  --primary-color-deep: #d75455;
 }
