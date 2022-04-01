@@ -14,18 +14,33 @@ export const sentence = computed(() => {
 export const inputText = useLocalStorage('inputText', 'xxx')
 
 // show data
-// export const sentenceFilter = ref(sentence.value)
-// watchDebounced(
-//   inputText,
-//   () => {
-//     sentenceFilter.value = sentence.value.filter((s: string) => {
-//       return s.includes(inputText.value)
-//     }).map(s => s.replace(inputText.value, `<span class="highlight">${inputText.value}</span>`))
-//   },
-//   { debounce: 500 },
-// )
 export const sentenceFilter = computed(() => {
   return sentence.value.filter((s: string) => {
     return s.includes(inputText.value)
   }).map(s => s.replace(inputText.value, `<span class="highlight">${inputText.value}</span>`))
+})
+
+// bounding
+export const selectMode = useLocalStorage('selectMode', false)
+export const toggleSelectMode = useToggle(selectMode)
+const { x, y } = useMouse({ type: 'client' })
+const { element } = useElementByPoint({ x, y })
+const bounding = reactive(useElementBounding(element))
+useEventListener('scroll', bounding.update, true)
+
+export const boxStyles = computed(() => {
+  if (selectMode.value && element.value?.classList.contains('i-row')) {
+    return {
+      display: 'block',
+      width: `${bounding.width}px`,
+      height: `${bounding.height}px`,
+      left: `${bounding.left}px`,
+      top: `${bounding.top}px`,
+      backgroundColor: '#d7545566',
+      transition: 'all 0.2s linear',
+    } as Record<string, string | number>
+  }
+  return {
+    display: 'none',
+  }
 })

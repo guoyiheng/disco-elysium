@@ -1,6 +1,6 @@
 
 <script setup lang="ts">
-import { inputText, sentenceFilter } from '~/logics'
+import { boxStyles, inputText, selectMode, sentenceFilter, toggleSelectMode } from '~/logics'
 
 const clipboard = useClipboard()
 function copy(s: string) {
@@ -19,29 +19,6 @@ watch(sentenceFilter, () => {
   scrollTo(0)
 })
 
-// bounding
-const { x, y } = useMouse({ type: 'client' })
-const { element } = useElementByPoint({ x, y })
-const bounding = reactive(useElementBounding(element))
-useEventListener('scroll', bounding.update, true)
-
-const boxStyles = computed(() => {
-  if (element.value?.classList.contains('i-row')) {
-    return {
-      display: 'block',
-      width: `${bounding.width}px`,
-      height: `${bounding.height}px`,
-      left: `${bounding.left}px`,
-      top: `${bounding.top}px`,
-      backgroundColor: '#d7545566',
-      transition: 'all 0.2s linear',
-    } as Record<string, string | number>
-  }
-  return {
-    display: 'none',
-  }
-})
-
 </script>
 
 <template>
@@ -51,8 +28,8 @@ const boxStyles = computed(() => {
     <div class="result-area relative overflow-hidden h-full" flex="~ col" md="flex-row">
       <div class="flex flex-col h-full w-full items-start">
         <div class="flex items-center py-4">
-          <a i-carbon:text-annotation-toggle opacity50 mr-2 />
-          <span opacity50 text-sm>TEXT</span>
+          <span opacity50 text-sm>Dialogue</span>
+          <a i-carbon:select-window opacity50 ml-2 :color="selectMode?'$primary-color':''" cursor-pointer @click="toggleSelectMode()" />
         </div>
         <div v-bind="containerProps" class="overflow-y-scroll h-70vh w-full">
           <div v-bind="wrapperProps">
