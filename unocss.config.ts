@@ -25,7 +25,6 @@ export default defineConfig({
       fonts: {
         sans: 'DM Sans',
         serif: 'DM Serif Display',
-        mono: 'Input Mono, Fira-Code, monospace, DM Mono',
       },
     }),
   ],
