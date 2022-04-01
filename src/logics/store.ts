@@ -29,7 +29,7 @@ const bounding = reactive(useElementBounding(element))
 useEventListener('scroll', bounding.update, true)
 
 export const boxStyles = computed(() => {
-  if (selectMode.value && element.value?.classList.contains('i-row')) {
+  if (selectMode.value && element.value?.classList.contains('dialog-item')) {
     return {
       display: 'block',
       width: `${bounding.width}px`,

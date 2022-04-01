@@ -36,7 +36,7 @@ watch(sentenceFilter, () => {
             <div
               v-for="(s, i) in list"
               :key="i"
-              class="i-row"
+              class="dialog-item"
               whitespace-pre-wrap
               break-all
               hyphens-auto
