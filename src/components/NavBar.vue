@@ -12,7 +12,7 @@ import { isDark, toggleDark } from '~/logics'
       class="icon-btn"
       i-carbon-logo-github
       rel="noreferrer"
-      href="https://github.com/antfu/disco-elysium"
+      href="https://github.com/guoyiheng/disco-elysium"
       target="_blank"
       title="GitHub"
       mr-4
